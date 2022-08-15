@@ -1,12 +1,17 @@
+let employeePayrollList;
 window.addEventListener('DOMContentLoaded',(event) => {
+    employeePayrollList = getEmployeePayrollDataFromStorage();
+    document.querySelector(".emp-count").textContent = employeePayrollList.length;
     createInnerHtml();
 });
-
+const getEmployeePayrollDataFromStorage = () =>{
+    return localStorage.getItem('EmployeePayrollList') ? JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+}
 function createInnerHtml() {
+    if(employeePayrollList.length==0) return;
     const headerHtml="<th></th><th>Name</th><th>Gender</th><th>Department</th>"+
                     " <th>Salary</th><th>Start Date</th><th>Actions</th>";
     let innerHtml = `${headerHtml}`;
-    let employeePayrollList = createEmployeePayrollJSON();
     for (const employeePayrollData of employeePayrollList)
     {
         innerHtml = `${innerHtml}
@@ -27,32 +32,6 @@ function createInnerHtml() {
         `;
     }
     document.querySelector('#table-display').innerHTML = innerHtml;
-}
-//JSON Object created
-const createEmployeePayrollJSON = () => {
-    let employeePayrollListLocal = [
-        {
-            _name: 'Vijay Kumar',
-            _gender: 'male',
-            _department: ['Engineering','Finance'],
-            _salary: '500000',
-            _startDate:'29 Oct 2019',
-            _note: '',
-            _id: new Date().getTime(),
-            _profilePic:'../assets/Suriya-1024x1010.png'
-        },
-        {
-            _name: 'Gyatri',
-            _gender: 'female',
-            _department: ['Engineering'],
-            _salary: '400000',
-            _startDate:'29 July 2020',
-            _note: '',
-            _id: new Date().getTime(),
-            _profilePic:'../assets/wallpapersden.com_cute-selena-gomez-photoshoot_2500x1875.png'
-        }
-    ];
-    return employeePayrollListLocal;
 }
 const getDeptHtml = (deptList) =>{
     let deptHtml = '';
