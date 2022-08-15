@@ -2,10 +2,6 @@ class EmployeeePayrollData
 {
         get gender() {return this._gender;}
         set gender(gender){
-            // let genederRegex = RegExp('^[M,F]{1}[a-z]{3,7}');
-            // if(genederRegex.test(gender))
-            // {this._gender = gender;}
-            // else{ throw 'Wrong input for gender';}
             this._gender = gender;}
         get startDate() {return this._startDate;}
         set startDate(startDate) {this._startDate = startDate;}
